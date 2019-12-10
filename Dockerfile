@@ -46,11 +46,11 @@ ENV \
  DLC="/usr/dlc" \
  WRKDIR="/usr/wrk" \
  PROCFG="" \
- NAMESERVER_PORT="5162"
+ NAMESERVER_PORT="5162" \
  APPSERVER_PORT="3090" \
  APPSERVER_MINPORT="21100" \
  APPSERVER_MAXPORT="21200" \
- ADMINSERVER_PORT="20931" \
+ ADMINSERVER_PORT="20931"
 
 # volume for application code
 VOLUME /var/lib/openedge/code/
