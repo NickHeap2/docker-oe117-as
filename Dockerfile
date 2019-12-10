@@ -9,7 +9,7 @@ RUN /install/openedge/proinst -b /install/openedge/response.ini -l silentinstall
 
 ###############################################
 
-# actual db server image
+# actual as server image
 FROM centos:7.3.1611
 
 LABEL maintainer="Nick Heap (nickheap@gmail.com)" \
@@ -18,7 +18,7 @@ LABEL maintainer="Nick Heap (nickheap@gmail.com)" \
  oeversion="11.7.1"
 
 # Add Tini
-ENV TINI_VERSION v0.17.0
+ENV TINI_VERSION v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 ENTRYPOINT ["/tini", "--"]
@@ -46,16 +46,16 @@ ENV \
  DLC="/usr/dlc" \
  WRKDIR="/usr/wrk" \
  PROCFG="" \
+ NAMESERVER_PORT="5162"
  APPSERVER_PORT="3090" \
  APPSERVER_MINPORT="21100" \
  APPSERVER_MAXPORT="21200" \
- ADMINSERVER_PORT="20931"
+ ADMINSERVER_PORT="20931" \
 
 # volume for application code
 VOLUME /var/lib/openedge/code/
 
-EXPOSE $ADMINSERVER_PORT $APPSERVER_PORT $APPSERVER_MINPORT-$APPSERVER_MINPORT
+EXPOSE $NAMESERVER_PORT $ADMINSERVER_PORT/udp $APPSERVER_PORT $APPSERVER_MINPORT-$APPSERVER_MAXPORT
 
 # Run start.sh under Tini
 CMD ["/usr/wrk/start.sh"]
-

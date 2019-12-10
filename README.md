@@ -1,6 +1,6 @@
 # docker-oe117-as
 
-## docker commands
+## Docker commands
 
 ### Build the docker image
 
